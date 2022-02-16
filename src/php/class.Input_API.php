@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/API/config.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/config.php');
 require_once('DB.php');
 require_once('class.API.php');
 

@@ -10,6 +10,8 @@ if (!array_key_exists(SYMBOL, $params)) {
 	return false;
 }
 
+$params[SYMBOL] = strtoupper($params[SYMBOL]);  // API expect Uppercase
+
 $raw_data = PriceFeed::GetRawData($params[SYMBOL]);
 $preformatted_data = PriceFeed::EvaluatePriceFeed($raw_data);
 

@@ -1,28 +1,5 @@
 <?php
 
-const DB_INSERT_NEW_PRICE = 'Insert into 
-                    pricefeed (               
-                        tokenpair_fk, 
-                        price_ab, 
-                        price_ba,
-                        commission,
-                        totalLiquidity_token,
-                        totalLiquidity_usd,
-                        rewardPct,
-                        apr_reward,
-                        apr_total) 
-                   VALUES (
-                       :token_pair_id, 
-                       :price_ab, 
-                       :price_ba,
-                       :commission, 
-                       :totalLiquidity_token,
-                       :totalLiquidity_usd,
-                       :rewardPct,                       
-                       :apr_reward,
-                       :apr_total)';
-
-const DB_GET_PAIR_ID = 'SELECT pair_id FROM tokenpair WHERE symbol=:symbol';
 
 class DB
 {
@@ -63,7 +40,28 @@ class DB
 		];
 
 		try {
-			$this->pdo->prepare(DB_INSERT_NEW_PRICE)->execute($data);
+			$this->pdo->prepare(
+				'Insert into 
+                    pricefeed (
+	                    tokenpair_fk,
+	                    price_ab,
+	                    price_ba,
+	                    commission,
+	                    totalLiquidity_token,
+	                    totalLiquidity_usd,
+	                    rewardPct,
+	                    apr_reward,
+	                    apr_total) 
+                   VALUES (
+                       :token_pair_id, 
+                       :price_ab, 
+                       :price_ba,
+                       :commission, 
+                       :totalLiquidity_token,
+                       :totalLiquidity_usd,
+                       :rewardPct,                       
+                       :apr_reward,
+                       :apr_total)')->execute($data);
 		} catch (Exception $exception) {
 			echo '<pre>';
 			print_r($exception);
@@ -77,7 +75,7 @@ class DB
 	public function getPairID($symbol): bool|int
 	{
 		try {
-			$stm = $this->pdo->prepare(DB_GET_PAIR_ID);
+			$stm = $this->pdo->prepare('SELECT pair_id FROM tokenpair WHERE symbol=:symbol');
 			$stm->execute(['symbol' => $symbol]);
 			$row = $stm->fetch(PDO::FETCH_ASSOC);
 			return $row ? $row['pair_id'] : false;

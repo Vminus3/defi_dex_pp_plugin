@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require_once('config.php');
-require_once('src/class.API.php');
+require_once('src/php/class.API.php');
 
 $params = $_GET;
 
