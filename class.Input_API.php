@@ -1,7 +1,7 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/config.php');
-require_once('DB.php');
-require_once('class.API.php');
+require_once('config.php');
+require_once('src/php/DB.php');
+require_once('src/php/class.API.php');
 
 
 $I_API = new Input_API();
